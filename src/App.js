@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {  withRouter } from 'react-router-dom';
+import Router from './Router';
+import { connect } from 'react-redux';
+import Navigation from './features/Navbar/navbar'
+import HeaderContainer from './features/Header/headerConatiner';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+
+class App extends React.Component {
+  render(){
+    return <div className='page-container'>
+      <HeaderContainer />
+      <Navigation {...this.props} />
+      <Router />
     </div>
-  );
+  }
 }
 
-export default App;
+function mapStateToProps (state) {
+  return {
+    cart: state.cart
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(App))
