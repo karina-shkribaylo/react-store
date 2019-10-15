@@ -4,31 +4,11 @@ import Cart from '../cart';
 import Login from './login';
 import *  as axios from 'axios';
 
-function submit(values, cart) {
-    const { email, name} = values
-    axios
-        .post(`https://api.myjson.com/bins/622xq`, {
-            order: {
-                name,
-                email
-              
-            }
-        }).then(response => {
-            if(response.errors) {
-                alert('Something is wrong')
-             
-            }
-                    document.location.href = `/homepage`
-                
-            
-        })
-
-}
 
 function Form (props) {
 return <div> 
 
-<Login onSubmit={(values) => submit(values)}/>
+<Login />
 </div>
 
 }

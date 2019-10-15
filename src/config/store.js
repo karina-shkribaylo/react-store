@@ -10,9 +10,12 @@ const reducers = combineReducers ({
     auth: authReducer
 })
 
-const store = createStore (reducers, /*applyMiddleware(thunkMiddleware)*/
-window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const rootReducer = (state, action) => {
+    return reducers(state,action)
+}
 
-//window.store = store;
 
-export default store;
+
+export function configureStore() {
+    return createStore(rootReducer, applyMiddleware(thunkMiddleware))
+}

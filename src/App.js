@@ -3,14 +3,14 @@ import {  withRouter } from 'react-router-dom';
 import Router from './Router';
 import { connect } from 'react-redux';
 import Navigation from './features/Navbar/navbar'
-import HeaderContainer from './features/Header/headerConatiner';
+
 
 
 
 class App extends React.Component {
   render(){
     return <div className='page-container'>
-      <HeaderContainer />
+    
       <Navigation {...this.props} />
       <Router />
     </div>

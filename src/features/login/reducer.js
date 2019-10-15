@@ -9,7 +9,6 @@ let initialState = {
 const authReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_USERS_DATA:
-            debugger;
         return {
             ...state,
             ...action.data,
@@ -21,6 +20,6 @@ const authReducer = (state = initialState, action) => {
 }
 
 
-export const setUserData = (email, password, rememberMe) => ({type: SET_USERS_DATA, email, password, rememberMe})
+export const setUserData = (email, password) => ({type: SET_USERS_DATA, email, password})
 
 export default authReducer

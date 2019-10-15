@@ -5,10 +5,13 @@ import * as axios from 'axios';
 import { getProducts } from '../../api/api';
 import { loadProducts } from './reducer';
 import { addToCart, removeFromCart } from '../cart/reducer'
+import {Redirect} from 'react-router-dom';
+
 
 class ProductListing extends React.Component {
     
     componentDidMount() {
+  
         const { loadProducts } = this.props
         getProducts()
             .then(data => {
@@ -19,8 +22,9 @@ class ProductListing extends React.Component {
     }
     
     
+    
     render() {
-        const { addToCart, removeFromCart, products, cart } = this.props
+        const { addToCart, removeFromCart, products, cart, goToCart } = this.props
         return <div className='product-listing'>
           {
             products.map(product =>
@@ -29,6 +33,8 @@ class ProductListing extends React.Component {
                 addToCart={addToCart}
                 removeFromCart={removeFromCart}
                 cartItem={cart.filter(cartItem => cartItem.id === product.id)[0]}
+                goToCart={goToCart}
+
               />)
           }
         </div>

@@ -2,19 +2,11 @@ import React from "react";
 import {render} from "react-dom";
 import { withFormik, Form, Field } from 'formik'
 import * as Yup from 'yup';
-import Homepage from '../../pages/homepage'
 import { connect } from 'react-redux';
 import {setUserData} from './reducer'
 import {Redirect} from "react-router-dom"
 
 class LoginForm extends React.Component {
-  componentDidMount() {
-    const rememberMe = localStorage.getItem('rememberMe') === 'true';
-    const email = rememberMe ? localStorage.getItem('email') : '';
-    const password = rememberMe ? localStorage.getItem('password') : '';
-
-    this.setState({ email, password, rememberMe });
-  }
 
  
   render() {
@@ -30,10 +22,7 @@ class LoginForm extends React.Component {
    { touched.password && errors.password && <p>{errors.password}</p>}
      <Field type="password" name="password" placeholder="Password" />
    </div>
-   <label>
-     <Field type="checkbox" name="rememberMe" checked={values.rememberMe} />
-   Remember Me
-   </label>
+   
    <button disabled={isSubmitting} 
    >Submit</button>
  </Form>
@@ -45,11 +34,10 @@ class LoginForm extends React.Component {
 
 
 const Login = withFormik({
- mapPropsToValues({email, password, rememberMe }) {
+ mapPropsToValues({email, password }) {
    return{
      email: email || '',
-     password: password || '',
-     rememberMe: rememberMe || false
+     password: password || ''
    }
  },
  validationSchema: Yup.object().shape({
@@ -58,16 +46,11 @@ const Login = withFormik({
  }),
  handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
    setTimeout(() => {
-     if(values.email === 'itcraft@test.com') {
-       setErrors({email: 'That email is already taken'})
-     }  else {
-      
-       resetForm()
-       
-     } 
-     setSubmitting(false)
+    localStorage.setItem('email', values.email) ;
+    localStorage.setItem('password', values.password) ;
+    return window.location='/market'
    }, 2000)
-  // displayName: 'BasicForm'
+  
  }
 })(LoginForm)
  
